@@ -15,18 +15,26 @@ the physics, the input and output files, every option and every known defect.
 
 ## Run
     build/radcor unpol --dir data/e94010/unpol --out e94010.dat
-    build/radcor unpol --dir mydata --precision double --set legacy=0 \
+    build/radcor unpol --input mydata.csv --precision double --set legacy=0 \
         --set collisional_loss=0 --set finite_acc=0 --details details.txt --root details.root
+    build/radcor check unpol --input mydata.csv          # validate an input
+    build/radcor convert unpol --input ele-input --to mydata.csv   # ele <-> csv <-> root
     build/radcor -h                                     # all options
 
+Input formats: the Fortran files (ele-input; radcor_input.dat + ds.inp), a CSV table with named
+columns, or a ROOT tree; from Python, arrays via python/radcor.py (manual, chapter 3).
+
 ## Layout
-    apps/radcor.cpp            command-line front end
+    apps/radcor.cpp            command-line front end (run, check, convert)
+    include/radcor/Input.h     the input, independent of format (RunInput), formats, validation
+    include/radcor/Run.h       drivers: RunInput -> engine -> outputs
     include/radcor/Engine.h    the unfolding engine (radiating formula, model, iteration)
     include/radcor/Options.h   every switch and parameter, with defaults
     include/radcor/Interp.h    spline and polynomial interpolation of the output stage
-    include/radcor/Legacy.h    drivers that read and write the Fortran file formats
-    src/                       drivers, option parsing, details and ROOT writers
+    src/                       formats, drivers, option parsing, ROOT input/output
+    python/radcor.py           Python interface
+    fortran/                   the original Fortran sources, Makefile
     data/e94010/               E94-010 inputs and the Fortran reference outputs
-    examples/                  reading the outputs; using the engine from your own program
-    tests/                     parity test and comparison scripts
-    doc/radcor_manual.pdf      the manual
+    examples/                  reading the outputs; the library from C++ and Python
+    tests/                     ctest: parity, input formats, Python, Fortran rebuild
+    doc/                       the manual; K. Slifer's description of his changes

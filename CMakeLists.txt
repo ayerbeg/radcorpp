@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.16)
-project(radcor VERSION 0.1.0 LANGUAGES CXX)
+project(radcor VERSION 0.4.0 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -12,7 +12,7 @@ add_compile_options(-Wall -Wextra -ffp-contract=off)
 
 option(RADCOR_WITH_ROOT "Build ROOT TTree output if ROOT is found" ON)
 
-add_library(radcor src/Legacy.cpp src/Options.cpp src/RootOut.cpp)
+add_library(radcor src/Input.cpp src/Run.cpp src/Options.cpp src/RootIO.cpp)
 target_include_directories(radcor PUBLIC include)
 
 if(RADCOR_WITH_ROOT)
@@ -32,7 +32,16 @@ target_link_libraries(radcor_app PRIVATE radcor)
 
 enable_testing()
 add_test(NAME parity_fortran COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/tests/run_parity.sh)
+add_test(NAME input_formats COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/tests/run_formats.sh)
+find_package(Python3 COMPONENTS Interpreter QUIET)
+if(Python3_FOUND)
+  add_test(NAME python_interface COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/tests/test_python.py)
+endif()
+find_program(GFORTRAN gfortran)
+if(GFORTRAN)
+  add_test(NAME fortran_rebuild COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/tests/run_fortran_parity.sh)
+endif()
 
-# Example: the engine driven from a CSV table (examples/engine_from_csv.cpp)
+# Example: the library used from C++ (examples/engine_from_csv.cpp)
 add_executable(engine_from_csv examples/engine_from_csv.cpp)
 target_link_libraries(engine_from_csv PRIVATE radcor)

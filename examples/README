@@ -1,5 +1,9 @@
 read_details.py        read a --details table with numpy; RC range and tail fractions per spectrum
 plot_rc.C              ROOT macro: RC factor and tail fractions of one spectrum from the --root tree
-engine_from_csv.cpp    drive the engine directly from a CSV table (built as build/engine_from_csv)
-ele2csv.py             convert an ele-input file into that CSV table
+engine_from_csv.cpp    use the library from C++: read any input format, drive the engine directly
+                       (built as build/engine_from_csv)
+python_unfold.py       unfold spectra given as numpy arrays with python/radcor.py
 mini/                  the two-spectrum example of the manual, chapter "Input and output files"
+
+Convert inputs between formats with the command line, e.g.
+  build/radcor convert unpol --dir data/e94010/unpol --to e94010.csv

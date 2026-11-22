@@ -108,8 +108,15 @@ class Engine {
 
   // Add a spectrum: kinematics from (e0, collisional losses) and points (nu, xs); returns its
   // 0-based index. Mirrors U:296-371 without the hole filling (done by the caller).
+  // Spectra must come in increasing E_s and nu must increase within a spectrum: the model
+  // interpolation (bornModel, interpSpectrum) assumes both, so anything else is rejected.
   int addSpectrum(T e0, T lossS, T lossP, const std::vector<T>& nu, const std::vector<T>& xs,
                   T tHalfTarget, T tBefore, T tAfter) {
+    if (nu.size() != xs.size() || nu.size() < 2) throw std::runtime_error("addSpectrum: need >= 2 points, nu and xs of equal length");
+    for (size_t j = 1; j < nu.size(); ++j)
+      if (!(nu[j] > nu[j - 1])) throw std::runtime_error("addSpectrum: nu must increase strictly within a spectrum");
+    if (!sp_.empty() && !(e0 - lossS > sp_.back().es))
+      throw std::runtime_error("addSpectrum: spectra must be added in increasing beam energy");
     Spectrum<T> s;
     s.e0 = e0;
     s.es = e0 - lossS;
