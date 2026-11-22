@@ -1,0 +1,7 @@
+new 06/25/04
+These spectra were generated using qfs
+and are used by this program to evaluate
+the finite acceptance correction.
+These values will only be good for the
+E94010 kinematics.   Other experiments
+should turn this feature off.

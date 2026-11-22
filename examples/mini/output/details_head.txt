@@ -1,0 +1,10 @@
+# radcor details (last pass). Energies MeV; cross sections in input units.
+# xs_in = measured; tail_Es / tail_Ep = E_s' / E_p' tail integrals (Fortran BBB / CCC);
+# soft = soft+virtual factor (CFACT); rad_model = soft*Born + tails; xs_born = unfolded Born;
+# prev = Born at pass NITT-1; RC = xs_in/xs_born; stat, syst = errors of xs_born; acc = acceptance factor
+#! radcor unpol (double)
+#!   input=ele-input
+#!   Z=2 A=3 theta=15.5 NE=2 NITT=10
+#!   internal=1 external=1 collisional_loss=0 finite_acc=0 radiate=0 delta=10 simpson_min=80 simpson_step=1 amass=931.494 b=1.33333
+#!   legacy: del_overwrite=0 spence_legacy=0 ejsz_cap=0 spline_bug=0 tbta_lag=0 radiate_overwrite=0
+#spec conf  pt        E0        Es        Ep        nu        xs_in      tail_Es      tail_Ep         soft    rad_model      xs_born         prev           RC         stat         syst       acc

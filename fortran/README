@@ -1,0 +1,18 @@
+Fortran sources translated by radcor, unchanged from the 2005 distribution (README.slifer).
+
+whitney/radcor.f          L. Whitney's SLAC code (Saclay version), based on G. Miller, SLAC-R-129.
+                          Kept for reference only: it does not compile with current gfortran
+                          (a DO variable is redefined, W:433). ele-input.old is its example input.
+unpolarized/nradcor.f     K. Slifer's unpolarized version for JLab E94-010 ("U" in the manual).
+                          correct.f: Slifer's small test program for the acceptance tables.
+polarized/nradcor.f       K. Slifer's polarized version ("P" in the manual).
+
+Slifer's description of his changes: ../doc/slifer_newcodes.pdf
+
+Build:   make                    (gfortran; flags in the Makefile)
+Run:     programs read and write fixed file names in the current directory:
+           U: ele-input, input/*_qfs_finite_acceptance.out -> output/E94010_xs_unfolded.dat
+           P: input/radcor_input.dat, input/ds.inp         -> output/ds.rc3
+         e.g.  cd ../data/e94010/unpol && mkdir -p output && ../../../fortran/unpolarized/nradcor
+Test:    ../tests/run_fortran_parity.sh builds both programs, runs them on data/e94010 and
+         compares with data/e94010/*/expected and with the C++.

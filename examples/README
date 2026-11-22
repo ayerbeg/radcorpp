@@ -1,0 +1,5 @@
+read_details.py        read a --details table with numpy; RC range and tail fractions per spectrum
+plot_rc.C              ROOT macro: RC factor and tail fractions of one spectrum from the --root tree
+engine_from_csv.cpp    drive the engine directly from a CSV table (built as build/engine_from_csv)
+ele2csv.py             convert an ele-input file into that CSV table
+mini/                  the two-spectrum example of the manual, chapter "Input and output files"

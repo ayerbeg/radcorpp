@@ -1,0 +1,14 @@
+02/10/05
+K. Slifer
+
+This tarball should contain 3 directories:
+
+ 2) "unpolarized_RC" : Modified code. For use with unpolarized cross sections.
+
+ 3) "polarized_RC"   : Modified code. For use with polarized cross sections.
+
+ 3) "original_code"  : Contains Whitney's original SLAC code for comparison.
+
+
+For complete description of modifications see:
+http://www.jlab.org/~slifer/codes.html

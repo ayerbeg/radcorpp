@@ -1,0 +1,23 @@
+radcor unpol (double)
+  internal=1 external=1 collisional_loss=0 finite_acc=0 radiate=0 delta=10 simpson_min=80 simpson_step=1 amass=931.494 b=1.33333
+  legacy: del_overwrite=0 spence_legacy=0 ejsz_cap=0 spline_bug=0 tbta_lag=0 radiate_overwrite=0
+   862   1
+   1716.9   1
+   862   2
+   1716.9   2
+   862   3
+   1716.9   3
+   862   4
+   1716.9   4
+   862   5
+   1716.9   5
+   862   6
+   1716.9   6
+   862   7
+   1716.9   7
+   862   8
+   1716.9   8
+   862   9
+   1716.9   9
+   862   10
+   1716.9   10

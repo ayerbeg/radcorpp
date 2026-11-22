@@ -1,0 +1,20 @@
+JLab E94-010 test data (3He, theta = 15.5 deg), used by the parity test and the manual.
+
+unpol/ele-input                     unpolarized input, 6 spectra, E0 = 862 ... 5058 MeV, 1031 points
+unpol/input/*_qfs_finite_acceptance.out
+                                    finite-acceptance tables (QFS), valid for these kinematics only
+unpol/expected/E94010_xs_unfolded.dat
+                                    output of the Fortran program built with gfortran 16.2
+                                    (-std=legacy -O0); the C++ in float mode reproduces it byte for byte
+unpol/expected/E94010_xs_unfolded.dat_official2004
+                                    the official 2004 result distributed with the Fortran; produced by
+                                    an earlier state of the code, agrees to <= 1% (manual, "Validation")
+pol/input/radcor_input.dat, pol/input/ds.inp
+                                    polarized input (header file and data table)
+pol/expected/ds.rc3                 Fortran output, gfortran 16.2 (byte-identical to the C++ float mode)
+pol/expected/ds.rc3_safe2005        output distributed with the Fortran (29 rows); on those rows
+                                    the Fortran output agrees to the last printed digit
+
+Run, from the suite top directory:
+  build/radcor unpol --dir data/e94010/unpol --out /tmp/u.dat
+  build/radcor pol   --dir data/e94010/pol   --out /tmp/p.dat

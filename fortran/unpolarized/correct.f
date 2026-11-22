@@ -1,0 +1,39 @@
+      PROGRAM CORRECT
+      PARAMETER(NL=2000,NE=6)
+      REAL XNU2(NL,NE), XFACTOR(NL,NE)
+      INTEGER NFINITE(NE)
+  
+      I = 3
+      CALL GET_FINITE_COR(I,XNU2,XFACTOR,NFINITE)
+
+      DO J = 1,NFINITE(I)
+        WRITE(6,*) XNU2(J,I),XFACTOR(J,I)      
+      ENDDO
+ 
+      END
+
+      SUBROUTINE GET_FINITE_COR(M,XNU2,XFACTOR,NFINITE)
+      PARAMETER(NL=2000,NE=6)
+      INTEGER NFINITE(NE)
+      REAL XNU2(NL,NE), XFACTOR(NL,NE)
+
+      CHARACTER LINE1*80, CELL(6)*4
+      DATA CELL/'8_SY','1_AR','2_JN','3_AR','4_2T','5_JN'/
+     
+      OPEN(UNIT=12,FILE=CELL(M)//'_qfs_finite_acceptance.out',STATUS='old')
+
+      N=0 
+ 10   CONTINUE
+      READ(12,'(A)',ERR=20) LINE1
+      N=N+1
+      IF (LINE1(1:1).EQ.'#') THEN
+        N=N-1
+        GOTO 10
+      ENDIF
+
+      READ(LINE1,*) XNU2(N,M),XJUNK,XJUNK,XFACTOR(N,M)
+      GOTO 10
+ 20   CONTINUE
+      NFINITE(M) = N
+      RETURN 
+      END
